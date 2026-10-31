@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Shield application from third-party browser extension / userscript errors
+      function isExtensionErr(msg, fn, stack) {
+        var str = ((msg || '') + ' ' + (fn || '') + ' ' + (stack || '')).toLowerCase();
+        return str.indexOf('extension:') !== -1 ||
+               str.indexOf('.user.js') !== -1 ||
+               str.indexOf('aresponse') !== -1 ||
+               str.indexOf('shortener') !== -1 ||
+               str.indexOf('injected-web.js') !== -1;
+      }
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        if (isExtensionErr(msg, url, error && error.stack)) {
+          return true; // suppress default error handling
+        }
+      };
+      window.addEventListener('error', function(e) {
+        if (isExtensionErr(e.message, e.filename, e.error && e.error.stack)) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+          return true;
+        }
+      }, true);
+      window.addEventListener('unhandledrejection', function(e) {
+        var str = (e.reason && (e.reason.stack || e.reason.message)) || String(e.reason || '');
+        if (isExtensionErr(str, '', '')) {
+          e.stopImmediatePropagation();
+          e.preventDefault();
+        }
+      }, true);
+    </script>
+    <title>Brightloop Software - Catalog &amp; Plan Management</title>
+    <meta name="description" content="Unified subscription lifecycle platform with FastAPI backend architecture, SQLite ORM models, variant pricing engine, and role-based access control." />
+    <meta property="og:title" content="Brightloop Software - Catalog &amp; Plan Management" />
+    <meta property="og:description" content="Unified subscription lifecycle platform with FastAPI backend architecture, SQLite ORM models, variant pricing engine, and role-based access control." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
