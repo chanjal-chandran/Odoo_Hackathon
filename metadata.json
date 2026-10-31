@@ -1,0 +1,6 @@
+{
+  "name": "Brightloop Subscriptions",
+  "description": "Unified subscription management, recurring billing, and self-service customer portal with robust authentication and role-based workflows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
