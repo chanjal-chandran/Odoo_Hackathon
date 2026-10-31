@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brightloop | Subscription Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0B1F2A; --muted:#4A5B66; --accent:#007A67; --accent-dark:#005B4C;
+  --accent-bg:#E3F4F0; --soft:#F3F6F5; --line:#DCE4E2; --amber:#F5B83D;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:'DM Sans',system-ui,sans-serif;font-size:17px;line-height:1.55;color:var(--ink);background:#fff}
+h1,h2,h3,.brand-name{font-family:'Bricolage Grotesque',system-ui,sans-serif}
+a{color:var(--accent)}
+a:hover{color:var(--accent-dark)}
+a:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+
+.container{max-width:1200px;margin:0 auto}
+section{padding:88px 24px}
+h2{margin:0 0 12px;font-weight:800;font-size:clamp(30px,3.6vw,44px);line-height:1.1;letter-spacing:-.02em}
+.lead{margin:0 0 40px;color:var(--muted);max-width:640px}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 22px;border-radius:10px;font-weight:700;text-decoration:none}
+.btn-primary{background:var(--accent);color:#fff}
+.btn-primary:hover{background:var(--accent-dark);color:#fff}
+.btn-outline{border:1.5px solid var(--ink);color:var(--ink)}
+.btn-outline:hover{background:var(--ink);color:#fff}
+.btn-lg{min-height:52px;padding:0 30px;border-radius:12px;font-size:18px}
+
+/* Header */
+header{padding:0 24px;border-bottom:1px solid var(--line)}
+.header-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px;padding:14px 0}
+.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);min-height:44px}
+.brand-name{font-weight:800;font-size:22px;letter-spacing:-.01em}
+nav ul{display:flex;flex-wrap:wrap;gap:4px 8px;list-style:none;margin:0;padding:0}
+nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 14px;color:var(--ink);text-decoration:none;font-weight:500}
+nav a:hover{color:var(--accent)}
+.auth{display:flex;flex-wrap:wrap;gap:10px}
+
+/* Hero */
+.hero{background:var(--soft);padding-top:72px}
+.hero-inner{display:flex;flex-wrap:wrap;align-items:center;gap:48px 64px}
+.hero-text{flex:1 1 460px;min-width:0}
+.hero-preview{flex:1 1 420px;min-width:0}
+.tag{display:inline-block;margin:0 0 16px;padding:6px 14px;border-radius:999px;background:var(--accent-bg);color:var(--accent-dark);font-weight:700;font-size:14px}
+.hero h1{margin:0 0 20px;font-weight:800;font-size:clamp(38px,5.2vw,66px);line-height:1.04;letter-spacing:-.025em}
+.hero p.sub{margin:0 0 32px;font-size:20px;color:var(--muted);max-width:560px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.note{margin:20px 0 0;color:var(--muted);font-size:15px}
+
+.panel{background:#fff;border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 24px 48px -24px rgba(11,31,42,.25)}
+.panel-head{display:flex;justify-content:space-between;margin-bottom:18px}
+.panel-head small{color:var(--muted);font-size:13px}
+.kpis{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.kpi{flex:1 1 120px;background:var(--soft);border-radius:12px;padding:14px}
+.kpi span{display:block;font-size:13px;color:var(--muted)}
+.kpi strong{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:28px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.row:last-child{padding-bottom:0}
+.row small{display:block;font-size:14px;color:var(--muted)}
+.chip{padding:4px 12px;border-radius:999px;font-weight:700;font-size:13px}
+.chip-paid{background:var(--accent-bg);color:var(--accent-dark)}
+.chip-confirmed{background:#E8EEF9;color:#25417A}
+.chip-overdue{background:#FDE8E4;color:#9A2F1F}
+
+/* Before / now */
+.compare{display:flex;flex-direction:column;gap:12px}
+.compare-row{display:flex;flex-wrap:wrap;gap:8px 32px;padding:20px 24px;border:1px solid var(--line);border-radius:14px}
+.compare-row div{flex:1 1 300px}
+.compare-row .before{color:var(--muted)}
+.compare-row .before strong{color:var(--ink)}
+.compare-row .now strong{color:var(--accent)}
+
+/* Cards */
+.alt{background:var(--soft)}
+.cards{display:flex;flex-wrap:wrap;gap:20px}
+.card{flex:1 1 320px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}
+.card h3{margin:0 0 8px;font-weight:700;font-size:22px}
+.card p{margin:0;color:var(--muted)}
+.icon{width:48px;height:48px;border-radius:12px;background:var(--accent-bg);color:var(--accent-dark);display:flex;align-items:center;justify-content:center;margin-bottom:18px}
+
+/* How it works */
+.dark{background:var(--ink);color:#fff}
+.dark .lead{color:#A9BAC4}
+.steps{display:flex;flex-wrap:wrap;gap:20px;margin-bottom:48px}
+.step{flex:1 1 200px;border-top:3px solid var(--amber);padding-top:16px}
+.step b{font-family:'Bricolage Grotesque',system-ui,sans-serif;font-weight:800;font-size:32px;color:var(--amber)}
+.step h3{margin:4px 0 6px;font-size:19px}
+.step p{margin:0;color:#A9BAC4;font-size:16px}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.flow span{padding:8px 18px;border-radius:999px;background:#1C3544;font-weight:500}
+.flow span.on{background:var(--amber);color:var(--ink);font-weight:700}
+.flow i{font-style:normal;color:#A9BAC4}
+
+/* Roles */
+.role{flex:1 1 320px;border:1px solid var(--line);border-radius:16px;padding:28px}
+.role h3{margin:0 0 8px;font-weight:700;font-size:24px}
+.role p{margin:0 0 16px;color:var(--muted)}
+.role a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;text-decoration:none}
+.role.highlight{background:var(--accent-bg)}
+.role.highlight p{color:#1F3A44}
+
+/* Reports */
+.reports-inner{display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-start}
+.reports-text{flex:1 1 380px;min-width:0}
+.reports-text p{margin:0;color:var(--muted)}
+.reports-text h2{margin-bottom:16px}
+.questions{flex:1 1 460px;min-width:0;display:flex;flex-wrap:wrap;gap:16px}
+.q{flex:1 1 200px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+.q b{display:block;margin-bottom:4px}
+.q span{color:var(--muted);font-size:16px}
+
+/* CTA */
+.cta{max-width:1200px;margin:0 auto;background:var(--accent);color:#fff;border-radius:24px;padding:64px 32px;text-align:center}
+.cta h2{margin:0 auto 14px;max-width:720px;font-size:clamp(30px,3.8vw,46px)}
+.cta p{margin:0 auto 32px;max-width:560px;color:var(--accent-bg)}
+.cta .cta-row{justify-content:center}
+.cta .btn-light{background:#fff;color:var(--accent-dark)}
+.cta .btn-light:hover{background:var(--accent-bg)}
+.cta .btn-line{border:1.5px solid #fff;color:#fff}
+.cta .btn-line:hover{background:#fff;color:var(--accent-dark)}
+.cta .small{margin:24px 0 0;font-size:15px}
+.cta .small a{color:#fff;font-weight:700}
+
+/* Footer */
+footer{padding:40px 24px;border-top:1px solid var(--line)}
+.footer-inner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 32px}
+footer ul{display:flex;flex-wrap:wrap;gap:4px 8px;list-style:none;margin:0;padding:0}
+footer ul a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;color:var(--muted);text-decoration:none}
+footer ul a:hover{color:var(--accent)}
+footer p{margin:0;color:var(--muted);font-size:15px}
+</style>
+</head>
+<body>
+
+<!-- HEADER / NAV -->
+<header>
+  <div class="container header-inner">
+    <a class="brand" href="#top">
+      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#007A67"/><path d="M22 12.5a7 7 0 1 0 1.2 5.2" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="22.5" cy="9.5" r="2.4" fill="#F5B83D"/></svg>
+      <span class="brand-name">Brightloop</span>
+    </a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#roles">Roles</a></li>
+        <li><a href="#reports">Reports</a></li>
+      </ul>
+    </nav>
+    <div class="auth">
+      <!-- Change these two links to your real routes (Django: /login/ and /signup/) -->
+      <a class="btn btn-outline" href="/login/">Log in</a>
+      <a class="btn btn-primary" href="/signup/">Sign up</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="tag">Subscription management platform</p>
+        <h1>Every plan, invoice and payment in one place.</h1>
+        <p class="sub">Brightloop runs the full life of a subscription business, from setting up plans to sending invoices, collecting payments and reporting recurring revenue.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary btn-lg" href="/signup/">Sign up</a>
+          <a class="btn btn-outline btn-lg" href="/login/">Log in</a>
+        </div>
+        <p class="note">Customers get their own portal. Staff get the tools. Admins stay in control.</p>
+      </div>
+
+      <div class="hero-preview">
+        <div class="panel" role="img" aria-label="Preview of the Brightloop finance dashboard with sample figures">
+          <div class="panel-head"><strong>Finance overview</strong><small>Sample data</small></div>
+          <div class="kpis">
+            <div class="kpi"><span>Active subscriptions</span><strong>1,248</strong></div>
+            <div class="kpi"><span>Monthly revenue</span><strong>₹8.4L</strong></div>
+            <div class="kpi"><span>Overdue invoices</span><strong>17</strong></div>
+          </div>
+          <div class="row"><div>INV-0412<small>Business plan, monthly</small></div><span class="chip chip-paid">Paid</span></div>
+          <div class="row"><div>INV-0413<small>Team plan, yearly</small></div><span class="chip chip-confirmed">Confirmed</span></div>
+          <div class="row"><div>INV-0398<small>Add-on pack, monthly</small></div><span class="chip chip-overdue">Overdue</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE / NOW -->
+  <section>
+    <div class="container">
+      <h2>From spreadsheets and guesswork to one system</h2>
+      <p class="lead">Missed renewals, hand-typed invoices and quarterly reports built by hand add up. Brightloop replaces each one.</p>
+      <div class="compare">
+        <div class="compare-row"><div class="before"><strong>Before:</strong> Subscriptions tracked in a spreadsheet</div><div class="now"><strong>Now:</strong> One record per subscription, with a clear status</div></div>
+        <div class="compare-row"><div class="before"><strong>Before:</strong> Renewals remembered by whoever notices first</div><div class="now"><strong>Now:</strong> Plans that close, pause or renew by the rules you set</div></div>
+        <div class="compare-row"><div class="before"><strong>Before:</strong> Invoices typed up by hand every month</div><div class="now"><strong>Now:</strong> Invoices created from the subscription, never billed twice or skipped</div></div>
+        <div class="compare-row"><div class="before"><strong>Before:</strong> Payments matched by scrolling bank statements</div><div class="now"><strong>Now:</strong> Each payment recorded against the right invoice</div></div>
+        <div class="compare-row"><div class="before"><strong>Before:</strong> Revenue reports built manually each quarter</div><div class="now"><strong>Now:</strong> A live dashboard with filters and a summary view</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features" class="alt">
+    <div class="container">
+      <h2>Everything a billing month needs</h2>
+      <p class="lead">Six building blocks, connected end to end.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7"/><path d="M12 11v10"/></svg></div>
+          <h3>Products and plans</h3>
+          <p>Set up products with variants that adjust the price, then plans that bill daily, weekly, monthly or yearly.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/><path d="M9 13h7"/><path d="M9 17h7"/></svg></div>
+          <h3>Quotes to subscriptions</h3>
+          <p>Start from a quotation template, then move each subscription from Draft to Active with its status visible to the whole team.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v4h-4"/></svg></div>
+          <h3>Automatic invoicing</h3>
+          <p>On billing day, invoices are created with customer details, lines, taxes and totals already filled in. Confirm, send or print.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 5L5 19"/><circle cx="7.5" cy="7.5" r="2"/><circle cx="16.5" cy="16.5" r="2"/></svg></div>
+          <h3>Taxes and discounts</h3>
+          <p>Taxes follow the rules your admin sets. Fixed or percentage discounts apply to the next invoice on their own and stop when they expire.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/><path d="M7 15h3"/></svg></div>
+          <h3>Payment tracking</h3>
+          <p>Record the method, amount, date and a note against the right invoice, and see what is paid and what is still outstanding.</p>
+        </div>
+        <div class="card">
+          <div class="icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V11"/><path d="M10 20V4"/><path d="M16 20v-9"/><path d="M22 20H2"/></svg></div>
+          <h3>Finance dashboard</h3>
+          <p>Active subscriptions, revenue, payments and overdue invoices in one place, with filters and a summary view.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="dark">
+    <div class="container">
+      <h2>From product to payment, step by step</h2>
+      <p class="lead">One chain of records, so nothing falls between spreadsheets.</p>
+      <div class="steps">
+        <div class="step"><b>1</b><h3>Set up</h3><p>The admin adds products, plans, taxes and discounts.</p></div>
+        <div class="step"><b>2</b><h3>Quote</h3><p>Sales starts from a template and builds the offer.</p></div>
+        <div class="step"><b>3</b><h3>Subscribe</h3><p>The quote is confirmed and the subscription goes active.</p></div>
+        <div class="step"><b>4</b><h3>Invoice</h3><p>Invoices are created on billing day with taxes and discounts.</p></div>
+        <div class="step"><b>5</b><h3>Collect</h3><p>Payments are recorded and overdue invoices get chased.</p></div>
+      </div>
+      <p style="margin:0 0 14px;font-weight:700">Every subscription shows where it stands</p>
+      <div class="flow">
+        <span>Draft</span><i aria-hidden="true">→</i>
+        <span>Quotation</span><i aria-hidden="true">→</i>
+        <span>Confirmed</span><i aria-hidden="true">→</i>
+        <span class="on">Active</span><i aria-hidden="true">→</i>
+        <span>Closed</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLES -->
+  <section id="roles">
+    <div class="container">
+      <h2>The right view for everyone</h2>
+      <p class="lead">Log in and see only what your role needs.</p>
+      <div class="cards">
+        <div class="role">
+          <h3>Admin</h3>
+          <p>Controls the whole system: products, plans, taxes, discounts, and adding new staff members.</p>
+          <a href="/login/">Log in as admin →</a>
+        </div>
+        <div class="role">
+          <h3>Internal staff</h3>
+          <p>Handles day-to-day work with limited access: quotes, subscriptions, invoices and payments.</p>
+          <a href="/login/">Staff log in →</a>
+        </div>
+        <div class="role highlight">
+          <h3>Customer portal</h3>
+          <p>See and manage your own subscriptions and invoices without emailing anyone.</p>
+          <a href="/signup/" style="color:var(--accent-dark)">Sign up as a customer →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REPORTS -->
+  <section id="reports" class="alt">
+    <div class="container reports-inner">
+      <div class="reports-text">
+        <h2>Finance answers in one view</h2>
+        <p>No more days spent answering simple questions at month end. Filter, summarize and chase, with pages that stay fast even with thousands of subscriptions.</p>
+      </div>
+      <div class="questions">
+        <div class="q"><b>How many are active?</b><span>Live count of active subscriptions.</span></div>
+        <div class="q"><b>What came in?</b><span>Revenue and payments received.</span></div>
+        <div class="q"><b>What is still owed?</b><span>Outstanding amounts by invoice.</span></div>
+        <div class="q"><b>Who is overdue?</b><span>Overdue invoices, ready to chase.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section>
+    <div class="cta">
+      <h2>Ready to run billing without the spreadsheet?</h2>
+      <p>Create your account in a minute, or log in to pick up where you left off.</p>
+      <div class="cta-row">
+        <a class="btn btn-lg btn-light" href="/signup/">Sign up</a>
+        <a class="btn btn-lg btn-line" href="/login/">Log in</a>
+      </div>
+      <p class="small">Forgot your password? <a href="/password-reset/">Get a reset link</a> sent to your registered email.</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container footer-inner">
+    <a class="brand" href="#top">
+      <svg width="28" height="28" viewBox="0 0 32 32" fill="none" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#007A67"/><path d="M22 12.5a7 7 0 1 0 1.2 5.2" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/><circle cx="22.5" cy="9.5" r="2.4" fill="#F5B83D"/></svg>
+      <span class="brand-name" style="font-size:18px">Brightloop</span>
+    </a>
+    <nav aria-label="Footer">
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#roles">Roles</a></li>
+        <li><a href="#reports">Reports</a></li>
+        <li><a href="/login/">Log in</a></li>
+        <li><a href="/signup/">Sign up</a></li>
+      </ul>
+    </nav>
+    <p>© 2026 Brightloop Software</p>
+  </div>
+</footer>
+
+</body>
+</html>
