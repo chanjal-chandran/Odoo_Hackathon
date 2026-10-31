@@ -1,0 +1,6 @@
+{
+  "name": "Brightloop Software - Catalog & Plan Management",
+  "description": "Unified subscription lifecycle platform with FastAPI backend architecture, SQLite ORM models, variant pricing engine, and role-based access control.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
